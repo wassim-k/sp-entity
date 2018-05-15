@@ -1,0 +1,86 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "array-type": [
+            true,
+            "generic"
+        ],
+        "interface-name": false,
+        "no-console": [
+            false
+        ],
+        "no-floating-promises": true,
+        "no-unused-variable": true,
+        "no-unused-expression": true,
+        "one-line": [
+            true,
+            "check-open-brace",
+            "check-whitespace"
+        ],
+        "member-ordering": [
+            true,
+            {
+                "order": [
+                    "public-static-field",
+                    "protected-static-field",
+                    "private-static-field",
+                    "public-instance-field",
+                    "protected-instance-field",
+                    "private-instance-field",
+                    "constructor",
+                    "public-instance-method",
+                    "protected-instance-method",
+                    "private-instance-method",
+                    "public-static-method",
+                    "protected-static-method",
+                    "private-static-method"
+                ]
+            }
+        ],
+        "max-line-length": [
+            true,
+            180
+        ],
+        "no-var-requires": false,
+        "object-literal-sort-keys": [
+            false
+        ],
+        "no-string-literal": false,
+        "no-trailing-whitespace": [true, "ignore-blank-lines"],
+        "quotemark": [
+            true,
+            "single"
+        ],
+        "typedef": [
+            true,
+            "arrow-parameter",
+            "call-signature",
+            "parameter",
+            "property-declaration",
+            "variable-declaration",
+            "member-variable-declaration"
+        ],
+        "trailing-comma": [
+            true,
+            {
+                "multiline": "never",
+                "singleline": "never"
+            }
+        ],
+        "triple-equals": [
+            false
+        ],
+        "variable-name": [
+            true,
+            "ban-keywords",
+            "check-format",
+            "allow-leading-underscore",
+            "allow-pascal-case"
+        ]
+    },
+    "rulesDirectory": []
+}

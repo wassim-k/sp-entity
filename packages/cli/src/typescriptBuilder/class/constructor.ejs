@@ -1,0 +1,7 @@
+    public constructor(<% for(let i = 0; i < params.length; ++i) { -%>
+<%- params[i].name %><% if (params[i].optional) { %>?<% } %>: <%- params[i].type %><% if (i !== params.length - 1) { %>, <% } %><% } %>) {
+
+<% for(const field of fields) { -%>
+        this.<%- field.name %> = <%- field.value %>;
+<% } -%>
+    }

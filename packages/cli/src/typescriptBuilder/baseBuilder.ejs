@@ -1,0 +1,12 @@
+<% if (comment) { -%>
+<%- comment %>
+<%# NEW LINE %>
+<% } -%>
+<%- include('exportImport/exportImport', exports) -%>
+<%- include('exportImport/exportImport', imports) -%>
+<% if (statements.length) { -%>
+<% for(const statement of statements) { -%>
+<%- statement %>
+<% } -%>
+<% } -%>
+<% if (templateName) { %><%- include(`${templateName}/${templateName}`) -%><% } -%>

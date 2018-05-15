@@ -1,0 +1,10 @@
+export class <%- name %> {
+
+<% for(const field of fields) { -%>
+    <%- field.modifier %> readonly <%- field.name %>: <%- field.type %>;
+<% } -%>
+<% if(constructorParams.length > 0) { -%>
+
+<%- include('constructor', { params: constructorParams, fields }) %>
+<% } -%>
+}

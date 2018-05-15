@@ -1,0 +1,8 @@
+<% for(const statement of statements) { -%>
+<% if (statement.entries.length === 0) { continue; } -%>
+<%- verb %> { <% for(let i = 0; i < statement.entries.length; ++i) { -%>
+<%- statement.entries[i]%><% if (i !== statement.entries.length - 1) { %>, <% } %><% } -%> } from '<%- statement.from %>';
+<% } -%>
+<% if (statements.length > 0) { -%>
+<%# NEW LINE %>
+<% } -%>

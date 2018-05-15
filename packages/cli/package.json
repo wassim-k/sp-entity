@@ -1,0 +1,62 @@
+{
+    "name": "@sp-entity/cli",
+    "version": "1.0.0",
+    "description": "Generate entity classes for SharePoint lists",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wassim-k/sp-entity.git"
+    },
+    "author": "Wassim Khalil",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/wassim-k/sp-entity/issues"
+    },
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "bin": {
+        "spe": "./dist/cli.js"
+    },
+    "scripts": {
+        "clean": "rimraf dist",
+        "build": "npm run tslint && npm run clean && tsc && npm run copy",
+        "tslint": "tslint --project ./tsconfig.json",
+        "copy": "copyfiles -u 1 src/**/*.ejs dist/",
+        "test": "mocha --opts test/mocha.opts",
+        "test:watch": "npm run test -- --watch"
+    },
+    "dependencies": {
+        "@pnp/common": "^1.0.2",
+        "@pnp/logging": "^1.0.2",
+        "@pnp/odata": "^1.0.2",
+        "@pnp/sp": "^1.0.2",
+        "camelcase": "^4.1.0",
+        "chalk": "^2.3.2",
+        "commander": "^2.14.1",
+        "ejs": "^2.5.7",
+        "fs-extra": "^5.0.0",
+        "hoek": ">=4.2.1",
+        "inquirer": "^4.0.2",
+        "is-guid": "^0.0.2",
+        "pnp-auth": "^0.0.3"
+    },
+    "devDependencies": {
+        "@types/camelcase": "^4.1.0",
+        "@types/chai": "^4.1.2",
+        "@types/ejs": "^2.5.0",
+        "@types/fs-extra": "^5.0.0",
+        "@types/inquirer": "0.0.35",
+        "@types/mocha": "^5.0.0",
+        "chai": "^4.1.2",
+        "copy-files": "^0.1.0",
+        "mocha": "^5.0.5",
+        "rimraf": "^2.6.2",
+        "ts-node": "^5.0.1",
+        "tslint": "^5.8.0",
+        "typemoq": "^2.1.0",
+        "typescript": "2.7.1"
+    },
+    "files": [
+        "dist",
+        "README.md"
+    ]
+}
