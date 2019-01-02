@@ -3,12 +3,21 @@ import { SpException } from './spException';
 
 export class SpeHttpClient {
 
+    private static _instance: SpeHttpClient;
+
     public headers: { [key: string]: string };
 
     private _fetchClient: GlobalFetch | undefined;
 
-    public constructor() {
+    private constructor() {
         this.headers = {};
+    }
+
+    public static get instance(): SpeHttpClient {
+        if (this._instance === undefined) {
+            this._instance = new SpeHttpClient();
+        }
+        return this._instance;
     }
 
     public set fetchClient(value: GlobalFetch) {
@@ -16,10 +25,11 @@ export class SpeHttpClient {
     }
 
     public get fetchClient(): GlobalFetch {
+        const g: any = typeof global !== 'undefined' ? global : window;
         if (this._fetchClient !== undefined) {
             return this._fetchClient;
-        } else if (typeof global !== 'undefined' && typeof (global as any).fetch === 'function') {
-            return global as any;
+        } else if (g !== undefined && typeof g.fetch === 'function') {
+            return g as any;
         } else {
             throw new Error(`fetchClient is not set`);
         }
@@ -32,7 +42,7 @@ export class SpeHttpClient {
 
     public post(url: string, options: RequestInit = {}): Promise<any> {
         options.method = 'POST';
-        return RequestDigest.get(url).then((requestDigest: string) => {
+        return RequestDigest.get(url, this).then((requestDigest: string) => {
             this.addHeaders(options, { 'X-RequestDigest': requestDigest });
             return this.fetch(url, options);
         });
@@ -40,7 +50,7 @@ export class SpeHttpClient {
 
     public delete(url: string, options: RequestInit = {}): Promise<any> {
         options.method = 'DELETE';
-        return RequestDigest.get(url).then((requestDigest: string) => {
+        return RequestDigest.get(url, this).then((requestDigest: string) => {
             this.addHeaders(options, { 'X-RequestDigest': requestDigest });
             return this.fetch(url, options);
         });

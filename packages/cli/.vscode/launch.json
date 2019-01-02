@@ -8,14 +8,14 @@
             "name": "Run mocha",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
             "args": [
                 "--colors",
                 "-r",
                 "ts-node/register",
                 "${relativeFile}"
             ],
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceFolder}",
             "protocol": "inspector"
         }
     ]

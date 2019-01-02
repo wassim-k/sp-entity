@@ -1,6 +1,5 @@
 import { isGuid } from 'is-guid';
-import { httpClient } from './config';
-import { combineUrl, formatUrl, getContextWebUrl } from './httpClient';
+import { combineUrl, formatUrl, getContextWebUrl, SpeHttpClient } from './httpClient';
 import { ItemCollection } from './itemCollection';
 import { GetItemQueryParams, QueryParams } from './odata';
 import { parseItemCollection, parseOdata } from './parsers';
@@ -12,6 +11,7 @@ export class SpList {
 
     private readonly listApiUrl: string;
     private readonly defaultViewThreshold: number = 5000;
+    private readonly httpClient: SpeHttpClient = SpeHttpClient.instance;
 
     public constructor(listName: string, webUrl: string = getContextWebUrl()) {
 
@@ -28,7 +28,7 @@ export class SpList {
 
         const baseUrl: string = `${this.listApiUrl}/items/getById(${itemId})`;
         const url: string = formatUrl(baseUrl, params);
-        return httpClient.get(url).then((json: any) => parseOdata<T>(json));
+        return this.httpClient.get(url).then((json: any) => parseOdata<T>(json));
     }
 
     /**
@@ -38,7 +38,7 @@ export class SpList {
 
         const url: string = `${this.listApiUrl}/items`;
         return this.ensureEntityTypeFullName(item)
-            .then((spItem: any) => httpClient.post(url, { body: JSON.stringify(spItem) }))
+            .then((spItem: any) => this.httpClient.post(url, { body: JSON.stringify(spItem) }))
             .then((json: any) => parseOdata<T>(json));
     }
 
@@ -48,7 +48,7 @@ export class SpList {
     public delete(itemId: number, etag: string = '*'): Promise<void> {
 
         const url: string = `${this.listApiUrl}/items(${itemId})`;
-        return httpClient.delete(url, {
+        return this.httpClient.delete(url, {
             headers: {
                 'IF-MATCH': etag,
                 'X-HTTP-Method': 'DELETE'
@@ -87,7 +87,7 @@ export class SpList {
 
         const baseUrl: string = `${this.listApiUrl}/items`;
         const url: string = formatUrl(baseUrl, params);
-        return httpClient.get(url).then((json: any) => parseItemCollection<T>(json, params));
+        return this.httpClient.get(url).then((json: any) => parseItemCollection<T>(json, params));
     }
 
     /**
@@ -106,7 +106,7 @@ export class SpList {
         const url: string = `${this.listApiUrl}/items(${id})`;
         return this.ensureEntityTypeFullName(item)
             .then((spItem: any) => {
-                return httpClient.post(url, {
+                return this.httpClient.post(url, {
                     body: JSON.stringify(spItem),
                     headers: {
                         'IF-MATCH': etag,
@@ -119,7 +119,7 @@ export class SpList {
     private ensureEntityTypeFullName(item: any): Promise<string> {
 
         const url: string = formatUrl(this.listApiUrl, { $select: 'ListItemEntityTypeFullName' });
-        return httpClient.get(url).then((json: any) => {
+        return this.httpClient.get(url).then((json: any) => {
             const { ListItemEntityTypeFullName } = parseOdata<{ ListItemEntityTypeFullName: string }>(json);
             return {
                 __metadata: { type: ListItemEntityTypeFullName },

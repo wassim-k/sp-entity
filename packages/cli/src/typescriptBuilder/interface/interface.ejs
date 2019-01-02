@@ -1,5 +1,5 @@
-export interface <%- name %><% if (extend) { %> extends <%- extend %><% } %> {
-<% for(let i = 0; i < fields.length; ++i) { %>
+export interface <%- name %><% if (extend) { %> extends <%- extend %><% } %> {<%
+    for(let i = 0; i < fields.length; ++i) { %>
     <% if(fields[i].readonly) { %>readonly <% } %><%- fields[i].name %>: <%- fields[i].type %>;<%
 } %>
 }

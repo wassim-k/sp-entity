@@ -32,6 +32,7 @@ export class EntityCodeBuilder {
         // Index
         this.indexBuilder = new TsBaseBuilder('');
         this.listNameConst = `${this.entityFileName}ListName`;
+        this.indexBuilder.setOverviewComment('// tslint:disable');
         this.indexBuilder.addStatement(`export const ${this.listNameConst}: string = '${listName}';`);
 
         this.build(fields);

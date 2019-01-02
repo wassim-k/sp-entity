@@ -12,9 +12,9 @@ export function combineUrl(left: string, right: string): string {
 }
 
 export function getContextWebUrl(): string {
-
-    if (global.hasOwnProperty('_spPageContextInfo')) {
-        return (global as any)._spPageContextInfo.webAbsoluteUrl;
+    const g: any = typeof global !== 'undefined' ? global : window;
+    if (g !== undefined && g.hasOwnProperty('_spPageContextInfo')) {
+        return (g as any)._spPageContextInfo.webAbsoluteUrl;
     } else {
         return '';
     }

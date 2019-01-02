@@ -1,5 +1,4 @@
 import { EntityCodeBuilder } from './entityCodeBuilder';
-import { TsBaseBuilder } from './typescriptBuilder';
 import { FsUtil } from './utility';
 
 export function generateEntity(codeBuilder: EntityCodeBuilder, dataContextFolder: string): void {

@@ -1,4 +1,3 @@
-import { httpClient } from '../config';
 import { combineUrl } from './httpUtil';
 
 export class RequestDigest {
@@ -18,7 +17,7 @@ export class RequestDigest {
         return now >= this.expiration;
     }
 
-    public static get(url: string): Promise<string> {
+    public static get(url: string, client: GlobalFetch): Promise<string> {
 
         const cachedDigest: RequestDigest = this.cache[url];
         if (cachedDigest !== undefined && !cachedDigest.hasExpired) {
@@ -27,7 +26,7 @@ export class RequestDigest {
 
         const webUrl: string = this.getWebUrl(url);
         const contextInfoUrl: string = combineUrl(webUrl, '/_api/contextinfo');
-        return httpClient
+        return client
             .fetch(contextInfoUrl, {
                 method: 'POST',
                 headers: {

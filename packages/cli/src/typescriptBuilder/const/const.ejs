@@ -1,5 +1,5 @@
-export const <%- name %>: <%- type %> = {
-<% for(let i = 0; i < assignments.length; ++i) { %>
+export const <%- name %>: <%- type %> = {<%
+    for(let i = 0; i < assignments.length; ++i) { %>
     <%- assignments[i].name %>: <%- assignments[i].value %><% if (i !== assignments.length - 1) { %>,<% } %><%
 }%>
 };

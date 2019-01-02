@@ -270,8 +270,8 @@ The [sample config](#config) above generates the following folder structure:
 
 ### Sample Generated Code
 
-#### employeeFields.ts
-An *{entityName}Fields.ts* file is generated with mappings for default fields in list returned by SharePoint's rest API. You may modify file by adding/removing field mappings, updating property names and adding/removing expand fields for lookups (e.g. *office.city* and *office.country*).
+#### employeeFields.ts *(auto-generated)*
+An *{entityName}Fields.ts* file is generated with mappings for default fields in the list returned by SharePoint's rest API. You may modify the file by adding/removing field mappings, updating property names and adding/removing expand fields for lookups (e.g. *office.city* and *office.country*).
 
 > Make sure to run *spe* tool after modifying this file to automatically update related interfaces.
 ```typescript
@@ -299,7 +299,7 @@ export const employeeFields: EmployeeFields = {
 };
 ```
 
-#### employeeItem.ts
+#### employeeItem.ts *(auto-generated)*
 ```typescript
 import { iso8601Date, SpBasePermissions, SpUrlValue } from '@sp-entity/entity';
 
@@ -322,7 +322,7 @@ export interface EmployeeItem {
 
 ```
 
-#### dataContext.ts
+#### dataContext.ts *(auto-generated)*
 ```typescript
 import { SpEntity } from '@sp-entity/entity';
 import { EmployeeFields, employeeFields, EmployeeItem, employeeListName } from './employee';
@@ -365,7 +365,7 @@ import { setup } from '@sp-entity/entity';
 import { IAuthOptions } from 'node-sp-auth';
 import NodeFetchClient from 'pnp-auth/lib/NodeFetchClient';
 
-const siteUrl: string = 'https://contoso.sharepoint.com/sites/company';
+const siteUrl: string = 'https://contoso.sharepoint.com/sites/example';
 
 const authOptions: IAuthOptions = {
     username: 'user@contoso.onmicrosoft.com',

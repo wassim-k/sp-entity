@@ -1,6 +1,6 @@
 {
     "name": "@sp-entity/list",
-    "version": "1.0.1",
+    "version": "1.0.4",
     "description": "SharePoint List API",
     "repository": {
         "type": "git",
