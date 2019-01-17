@@ -1,6 +1,6 @@
 {
     "name": "@sp-entity/list",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "SharePoint List API",
     "repository": {
         "type": "git",
@@ -36,6 +36,7 @@
     },
     "files": [
         "lib",
+        "src",
         "README.md"
     ]
 }

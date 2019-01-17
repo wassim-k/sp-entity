@@ -1,6 +1,6 @@
 {
     "name": "@sp-entity/entity",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Entity class for SharePoint list",
     "repository": {
         "type": "git",
@@ -45,6 +45,7 @@
         "typescript": "^2.7.2"
     },
     "files": [
+        "src",
         "lib",
         "README.md"
     ]
