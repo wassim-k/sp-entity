@@ -17,12 +17,11 @@ export function parseItemCollection<T>(json: any, params: QueryParams): ItemColl
 }
 
 function getNextQueryParams(next: string | undefined, params: QueryParams): QueryParams | undefined {
-
     if (next) {
         const qs: string = queryString.extract(next);
-        const { $skiptoken } = queryString.parse(qs);
+        let { $skiptoken } = queryString.parse(qs);
+        $skiptoken = $skiptoken ? Array.isArray($skiptoken) ? $skiptoken.join() : $skiptoken : undefined;
         return { ...params, $skiptoken };
     }
-    
     return undefined;
 }

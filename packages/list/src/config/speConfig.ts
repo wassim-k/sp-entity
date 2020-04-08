@@ -1,5 +1,7 @@
+import { IHttpClientImpl } from '@pnp/common';
+
 export interface SpeConfig {
-    
+
     /**
      * Custom headers applied to all requests
      */
@@ -8,5 +10,5 @@ export interface SpeConfig {
     /**
      * Factory method for creating fetch client (default uses window.fetch)
      */
-    fetchClientFactory?: () => GlobalFetch;
+    fetchClientFactory?: () => IHttpClientImpl;
 }

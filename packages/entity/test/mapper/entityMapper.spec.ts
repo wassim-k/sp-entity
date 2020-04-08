@@ -1,5 +1,5 @@
 import { iso8601Date } from '@sp-entity/list';
-import { expect, should } from 'chai';
+import { expect } from 'chai';
 import { EntityMapper } from '../../src/mapper';
 
 interface ListFields {

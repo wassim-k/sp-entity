@@ -1,4 +1,7 @@
-import { ContextInfo, List, Site, sp, Web } from '@pnp/sp';
+import { sp } from '@pnp/sp';
+import { IList } from '@pnp/sp/lists';
+import { IContextInfo, ISite, Site } from '@pnp/sp/sites';
+import { IWeb, Web } from '@pnp/sp/webs';
 import chalk from 'chalk';
 import { isGuid } from 'is-guid';
 import { IAuthContext } from 'node-sp-auth-config';
@@ -12,11 +15,11 @@ export class SpRestClient {
     public readonly spVer: number;
 
     private readonly cache: { [key: string]: SpList | undefined } = {};
-    private readonly spWeb: Web;
+    private readonly spWeb: IWeb;
 
     private constructor(authContext: IAuthContext, spVer: number = 16) {
 
-        this.spWeb = new Web(authContext.siteUrl);
+        this.spWeb = Web(authContext.siteUrl);
         this.spVer = spVer;
     }
 
@@ -31,11 +34,11 @@ export class SpRestClient {
             return Promise.resolve(cached);
         }
 
-        const list: List = isGuid(listName) ? this.spWeb.lists.getById(listName) : this.spWeb.lists.getByTitle(listName);
+        const list: IList = isGuid(listName) ? this.spWeb.lists.getById(listName) : this.spWeb.lists.getByTitle(listName);
 
         const [odataList, odataFields] = await Promise.all([
             list.select('Id,Title').get(),
-            list.fields.select(...odataFieldSelect).get()
+            list.fields.select(...odataFieldSelect).get<Array<ODataField>>()
         ]);
 
         return this.cache[odataList.Id] = this.cache[`{${odataList.Id}}`] = this.cache[odataList.Title] = {
@@ -55,8 +58,8 @@ export class SpRestClient {
                 }
             });
 
-            const spSite: Site = new Site(authContext.siteUrl);
-            const contextInfo: ContextInfo = await spSite.getContextInfo();
+            const spSite: ISite = Site(authContext.siteUrl);
+            const contextInfo: IContextInfo = await spSite.getContextInfo();
             const spVer: number = +(contextInfo.LibraryVersion as string).split('.')[0];
             return new SpRestClient(authContext, spVer);
         } catch (error) {

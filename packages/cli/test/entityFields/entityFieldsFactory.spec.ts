@@ -1,11 +1,11 @@
-import { expect, should } from 'chai';
+// tslint:disable:typedef
+// tslint:disable:max-line-length
+
+import { expect } from 'chai';
 import { IAuthContext } from 'node-sp-auth-config/dist';
 import * as TypeMoq from 'typemoq';
 import { EntityExpandField, EntityField, EntityFieldsFactory } from '../../src/entityFields';
-import { ODataField, SpField, SpFieldLookup, SpList, SpRestClient } from '../../src/sp';
-
-// tslint:disable:typedef
-// tslint:disable:max-line-length
+import { ODataField, SpField, SpFieldLookup, SpRestClient } from '../../src/sp';
 
 describe('EntityFieldsFactory', () => {
 
@@ -36,7 +36,6 @@ describe('EntityFieldsFactory', () => {
         });
 
         it('should map non lookup fields', async () => {
-
             spRestClientMock
                 .setup((spRestClient: SpRestClient) => spRestClient.getList(TypeMoq.It.isAnyString()))
                 .returns(async (listName: string) => ({
