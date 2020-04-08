@@ -1,4 +1,4 @@
-import { expect, should } from 'chai';
+import { expect } from 'chai';
 import { ItemCollection } from '../../src/itemCollection';
 import { QueryParams } from '../../src/odata';
 import { parseItemCollection } from '../../src/parsers';

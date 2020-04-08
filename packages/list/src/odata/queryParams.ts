@@ -10,7 +10,6 @@ export interface GetItemQueryParams {
 }
 
 export interface QueryParams {
-
     $filter?: string;
     $expand?: string | Array<string>;
     $orderby?: OrderByQueryParam | Array<OrderByQueryParam>;

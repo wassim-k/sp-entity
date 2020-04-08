@@ -1,3 +1,4 @@
+import { IHttpClientImpl } from '@pnp/common';
 import { RequestDigest } from './requestDigest';
 import { SpException } from './spException';
 
@@ -7,7 +8,7 @@ export class SpeHttpClient {
 
     public headers: { [key: string]: string };
 
-    private _fetchClient: GlobalFetch | undefined;
+    private _fetchClient: IHttpClientImpl | undefined;
 
     private constructor() {
         this.headers = {};
@@ -20,11 +21,11 @@ export class SpeHttpClient {
         return this._instance;
     }
 
-    public set fetchClient(value: GlobalFetch) {
+    public set fetchClient(value: IHttpClientImpl) {
         this._fetchClient = value;
     }
 
-    public get fetchClient(): GlobalFetch {
+    public get fetchClient(): IHttpClientImpl {
         const g: any = typeof global !== 'undefined' ? global : window;
         if (this._fetchClient !== undefined) {
             return this._fetchClient;
@@ -57,11 +58,9 @@ export class SpeHttpClient {
     }
 
     public fetch(url: string, options?: RequestInit): Promise<any> {
-
         return this.fetchClient
             .fetch(url, this.ensureOptions(options))
             .then((response: Response) => {
-
                 if (response.ok) {
                     if (this.isJson(response)) {
                         return response.json();
@@ -86,13 +85,11 @@ export class SpeHttpClient {
     }
 
     private ensureOptions(options: RequestInit = {}): RequestInit {
-
         this.addHeaders(options, {
             'accept': 'application/json',
             'content-type': 'application/json;odata=verbose;charset=utf-8',
             ...this.headers
         });
-
         return {
             cache: 'no-cache',
             credentials: 'same-origin',
@@ -101,7 +98,6 @@ export class SpeHttpClient {
     }
 
     private addHeaders(options: RequestInit, headers: { [key: string]: string }): void {
-
         const allHeaders: Headers = new Headers(options.headers || {});
         for (const name of Object.keys(headers)) {
             if (!allHeaders.has(name)) {

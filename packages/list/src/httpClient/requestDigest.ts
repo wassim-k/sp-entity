@@ -1,3 +1,4 @@
+import { IHttpClientImpl } from '@pnp/common';
 import { combineUrl } from './httpUtil';
 
 export class RequestDigest {
@@ -17,7 +18,7 @@ export class RequestDigest {
         return now >= this.expiration;
     }
 
-    public static get(url: string, client: GlobalFetch): Promise<string> {
+    public static get(url: string, client: IHttpClientImpl): Promise<string> {
 
         const cachedDigest: RequestDigest = this.cache[url];
         if (cachedDigest !== undefined && !cachedDigest.hasExpired) {

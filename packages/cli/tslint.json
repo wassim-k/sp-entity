@@ -14,7 +14,6 @@
             false
         ],
         "no-floating-promises": true,
-        "no-unused-variable": true,
         "no-unused-expression": true,
         "one-line": [
             true,
@@ -50,7 +49,10 @@
             false
         ],
         "no-string-literal": false,
-        "no-trailing-whitespace": [true, "ignore-blank-lines"],
+        "no-trailing-whitespace": [
+            true,
+            "ignore-blank-lines"
+        ],
         "quotemark": [
             true,
             "single"

@@ -1,20 +1,15 @@
+import { IFieldInfo } from '@pnp/sp/fields';
+
 export const odataFieldSelect: Array<keyof ODataField> = [
     'AllowMultipleValues', 'Hidden', 'Id', 'InternalName', 'LookupList',
     'OutputType', 'PrimaryFieldId', 'ReadOnlyField', 'Title', 'TypeAsString'
 ];
 
-export interface ODataField {
-
+export interface ODataField extends IFieldInfo {
     AllowMultipleValues: boolean;
-    Hidden: boolean;
-    Id: string;
-    InternalName: string;
     LookupList: string;
     OutputType: number;
     PrimaryFieldId: string;
-    ReadOnlyField: boolean;
-    Title: string;
-    TypeAsString: string;
 }
 
 export interface ODataList {

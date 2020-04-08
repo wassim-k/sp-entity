@@ -3,10 +3,8 @@ import { combineUrl, formatUrl } from '../../src/httpClient/httpUtil';
 import { OrderByQueryParam } from '../../src/odata';
 
 describe('httpUtil', () => {
-
     describe('combineUrl', () => {
-
-        [
+        const cases: Array<[string | undefined, string | undefined, string | undefined]> = [
             ['https://contoso.sharepoint.com', 'path', 'https://contoso.sharepoint.com/path'],
             ['https://contoso.sharepoint.com/', 'path', 'https://contoso.sharepoint.com/path'],
             ['https://contoso.sharepoint.com', '/path', 'https://contoso.sharepoint.com/path'],
@@ -16,11 +14,11 @@ describe('httpUtil', () => {
             ['https://contoso.sharepoint.com', undefined, 'https://contoso.sharepoint.com'],
             [undefined, 'path', 'path'],
             [undefined, undefined, undefined]
-        ].forEach((test: [string, string, string], i: number) => {
-
+        ];
+        cases.forEach((test: [string | undefined, string | undefined, string | undefined], i: number) => {
             it(`should combine url (${i + 1})`, () => {
                 const [left, right, expected] = test;
-                const result: string = combineUrl(left, right);
+                const result: string = combineUrl(left as string, right as string);
                 expect(result).to.equal(expected);
             });
         });
