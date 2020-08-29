@@ -1,4 +1,4 @@
-import { IFieldInfo } from '@pnp/sp/fields';
+import { IFieldInfo } from '@pnp/sp-commonjs/fields';
 
 export const odataFieldSelect: Array<keyof ODataField> = [
     'AllowMultipleValues', 'Hidden', 'Id', 'InternalName', 'LookupList',

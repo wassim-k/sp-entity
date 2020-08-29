@@ -18,32 +18,30 @@
     },
     "scripts": {
         "clean": "rimraf dist",
-        "build": "npm run tslint && npm run clean && tsc && npm run copy-ejs",
+        "build": "yarn run tslint && yarn run clean && tsc --project ./tsconfig.json && yarn run copy-ejs",
         "tslint": "tslint --project ./tsconfig.json",
-        "copy-ejs": "copy-cli src/**/*.ejs dist/",
-        "test": "mocha --config test/.mocharc.js",
-        "test:watch": "npm run test -- --watch"
+        "copy-ejs": "copy-cli src/**/*.ejs dist/"
     },
     "dependencies": {
-        "@pnp/common": "^2.0.3",
-        "@pnp/logging": "^2.0.3",
-        "@pnp/odata": "^2.0.3",
-        "@pnp/sp": "^2.0.3",
+        "@pnp/common-commonjs": "^2.0.8",
+        "@pnp/logging-commonjs": "^2.0.8",
+        "@pnp/odata-commonjs": "^2.0.8",
+        "@pnp/sp-commonjs": "^2.0.8",
         "camelcase": "^6.0.0",
-        "chalk": "^4.0.0",
-        "commander": "^5.0.0",
-        "ejs": "^3.0.2",
-        "fs-extra": "^9.0.0",
+        "chalk": "^4.1.0",
+        "commander": "^6.1.0",
+        "ejs": "^3.1.5",
+        "fs-extra": "^9.0.1",
         "hoek": ">=6.1.3",
-        "inquirer": "^7.1.0",
+        "inquirer": "^7.3.3",
         "is-guid": "^0.0.2",
-        "pnp-auth": "0.0.4"
+        "pnp-auth": "2.0.0"
     },
     "devDependencies": {
         "@types/camelcase": "^5.2.0",
-        "@types/ejs": "^3.0.2",
-        "@types/fs-extra": "^8.1.0",
-        "@types/inquirer": "6.5.0",
+        "@types/ejs": "^3.0.4",
+        "@types/fs-extra": "^9.0.1",
+        "@types/inquirer": "7.3.1",
         "copy": "^0.3.2",
         "rimraf": "^3.0.2",
         "typemoq": "^2.1.0"

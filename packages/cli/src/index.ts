@@ -65,7 +65,7 @@ async function buildEntities(entities: Array<EntityConfig>, dataContextFolder: s
     return codeBuilders;
 }
 
-function buildDataContextClass(className: string, codeBuilders: Array<EntityCodeBuilder>, odataVerbose: boolean): TsClassBuilder {
+function buildDataContextClass(className: string, codeBuilders: Array<EntityCodeBuilder>, odataVerbose?: boolean): TsClassBuilder {
 
     const dataContextBuilder: TsClassBuilder = new TsClassBuilder(className);
     dataContextBuilder.setOverviewComment(readonlyComment);

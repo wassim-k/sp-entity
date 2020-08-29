@@ -14,14 +14,12 @@
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
     "scripts": {
-        "build": "npm run tslint && tsc",
-        "tslint": "tslint --project ./tsconfig.json",
-        "test": "mocha --config test/.mocharc.js",
-        "test:watch": "npm run test -- --watch"
+        "build": "yarn run tslint && tsc --project ./tsconfig.json",
+        "tslint": "tslint --project ./tsconfig.json"
     },
     "dependencies": {
         "is-guid": "^0.0.2",
-        "query-string": "^6.12.0"
+        "query-string": "^6.13.1"
     },
     "devDependencies": {
         "@types/query-string": "^6.3.0"

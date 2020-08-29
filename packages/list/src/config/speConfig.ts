@@ -1,4 +1,6 @@
-import { IHttpClientImpl } from '@pnp/common';
+export interface IHttpClientImpl {
+    fetch(input: RequestInfo, init?: RequestInit): Promise<Response>;
+}
 
 export interface SpeConfig {
 

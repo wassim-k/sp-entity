@@ -1,5 +1,4 @@
 import { iso8601Date } from '@sp-entity/list';
-import { expect } from 'chai';
 import { EntityMapper } from '../../src/mapper';
 
 interface ListFields {
@@ -52,12 +51,12 @@ describe('EntityMapper', () => {
 
         it('should prefix expand fields with internal name', () => {
             const { createdBy } = mapper.fields;
-            expect(createdBy.title).to.equal(`${createdBy.$name}/Title`);
+            expect(createdBy.title).toEqual(`${createdBy.$name}/Title`);
         });
 
         it('should not prefix expand fields internal name if already prefixed', () => {
             const { createdBy } = mapper.fields;
-            expect(createdBy.id).to.equal(`${createdBy.$name}/Id`);
+            expect(createdBy.id).toEqual(`${createdBy.$name}/Id`);
         });
 
         it('should create default $select of all non-lookup fields', () => {
@@ -65,7 +64,7 @@ describe('EntityMapper', () => {
             const { multiChoice, created, createdById, id, modified, multiLookupId, title } = listFields;
             const defaultSelect: Array<string> = [multiChoice, created, createdById, id, modified, multiLookupId, title];
 
-            expect(mapper.$select).to.deep.equal(defaultSelect);
+            expect(mapper.$select).toMatchObject(defaultSelect);
         });
     });
 
@@ -87,7 +86,7 @@ describe('EntityMapper', () => {
                 createdById: undefined
             };
 
-            expect(item).to.deep.equal(mappedItem);
+            expect(item).toMatchObject(mappedItem);
         });
 
         it('should map verbose odata collection', () => {
@@ -104,7 +103,7 @@ describe('EntityMapper', () => {
                 multiChoice: ['A', 'B']
             };
 
-            expect(item).to.deep.equal(mappedItem);
+            expect(item).toMatchObject(mappedItem);
         });
 
         it('should map lookup fields', () => {
@@ -121,7 +120,7 @@ describe('EntityMapper', () => {
                 testLookup: { id: 20, results: 'results value' }
             };
 
-            expect(item).to.deep.equal(mappedItem);
+            expect(item).toMatchObject(mappedItem);
         });
 
         it('should map multi lookup fields', () => {
@@ -142,7 +141,7 @@ describe('EntityMapper', () => {
                 ]
             };
 
-            expect(item).to.deep.equal(result);
+            expect(item).toMatchObject(result);
         });
 
         it('should map multi lookup fields (verbose)', () => {
@@ -165,7 +164,7 @@ describe('EntityMapper', () => {
                 ]
             };
 
-            expect(item).to.deep.equal(result);
+            expect(item).toMatchObject(result);
         });
     });
 
@@ -178,7 +177,7 @@ describe('EntityMapper', () => {
                 title: 'value'
             });
 
-            expect(updates).to.deep.equal({
+            expect(updates).toMatchObject({
                 [listFields.createdById]: 1,
                 [listFields.title]: 'value'
             });
@@ -191,7 +190,7 @@ describe('EntityMapper', () => {
                 multiChoice: ['A', 'B', 'C']
             });
 
-            expect(updates).to.deep.equal({
+            expect(updates).toMatchObject({
                 [listFields.id]: 1,
                 [listFields.multiChoice]: {
                     results: ['A', 'B', 'C']
@@ -205,7 +204,7 @@ describe('EntityMapper', () => {
                 id: 1,
                 Rogue: 1
             };
-            expect(() => mapper.mapUpdates(item)).to.throw();
+            expect(() => mapper.mapUpdates(item)).toThrow();
         });
     });
 });

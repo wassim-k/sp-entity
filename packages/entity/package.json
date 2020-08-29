@@ -25,11 +25,9 @@
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
     "scripts": {
-        "build": "npm run tslint && tsc",
-        "prepack": "npm run build && ncp ../../README.md ./README.md",
-        "tslint": "tslint --project ./tsconfig.json",
-        "test": "mocha --config test/.mocharc.js",
-        "test:watch": "npm run test -- --watch"
+        "build": "yarn run tslint && tsc --project ./tsconfig.json",
+        "prepack": "yarn run build && ncp ../../README.md ./README.md",
+        "tslint": "tslint --project ./tsconfig.json"
     },
     "dependencies": {
         "@sp-entity/list": "^1.1.0"

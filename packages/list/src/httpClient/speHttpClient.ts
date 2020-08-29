@@ -1,4 +1,4 @@
-import { IHttpClientImpl } from '@pnp/common';
+import { IHttpClientImpl } from '../config';
 import { RequestDigest } from './requestDigest';
 import { SpException } from './spException';
 

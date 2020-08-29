@@ -20,8 +20,8 @@ const { version } = require(path.join(__dirname, '..', 'package.json'));
 
     program
         .command('*', '', { noHelp: true })
-        .action((configPath: string, cmd: Command) => {
-            generate(path.resolve(configPath)).catch(handleError);
+        .action((cmd: Command, configPath: Array<string>) => {
+            generate(path.resolve(configPath[0])).catch(handleError);
         });
 
     program

@@ -1,7 +1,6 @@
 // tslint:disable:typedef
 // tslint:disable:max-line-length
 
-import { expect } from 'chai';
 import { IAuthContext } from 'node-sp-auth-config/dist';
 import * as TypeMoq from 'typemoq';
 import { EntityExpandField, EntityField, EntityFieldsFactory } from '../../src/entityFields';
@@ -32,7 +31,7 @@ describe('EntityFieldsFactory', () => {
                 })[listName]);
 
             const entityFields: Array<EntityField> = await entityFieldsFactory.create('List');
-            expect(entityFields.map((ef) => ef.internalName)).to.have.deep.members(['FileSystemObjectType']);
+            expect(entityFields.map((ef) => ef.internalName)).toMatchObject(['FileSystemObjectType']);
         });
 
         it('should map non lookup fields', async () => {
@@ -48,7 +47,7 @@ describe('EntityFieldsFactory', () => {
                 })[listName]);
 
             const entityFields: Array<EntityField> = await entityFieldsFactory.create('List');
-            expect(entityFields.map((ef) => ef.internalName)).to.have.deep.members(['FieldName', 'FileSystemObjectType']);
+            expect(entityFields.map((ef) => ef.internalName)).toMatchObject(['FileSystemObjectType', 'FieldName']);
         });
 
         it('should map lookup field to id and expand properties', async () => {
@@ -74,8 +73,8 @@ describe('EntityFieldsFactory', () => {
                 })[listName]);
 
             const entityFields: Array<EntityField> = await entityFieldsFactory.create('List');
-            expect(expandableLookupField.isExpandable).to.equal(true);
-            expect(entityFields.map((ef) => ef.internalName)).to.have.deep.members(['FileSystemObjectType', 'FieldLookup', 'FieldLookupId']);
+            expect(expandableLookupField.isExpandable).toEqual(true);
+            expect(entityFields.map((ef) => ef.internalName)).toMatchObject(['FileSystemObjectType', 'FieldLookup', 'FieldLookupId']);
         });
 
         it('should handle fields with duplicate titles', async () => {
@@ -94,7 +93,7 @@ describe('EntityFieldsFactory', () => {
                 })[listName]);
 
             const entityFields: Array<EntityField> = await entityFieldsFactory.create('List');
-            expect(entityFields.map((ef) => ef.propName)).to.have.deep.members(['fileSystemObjectType', 'duplicateTitle', 'duplicateTitle2', 'duplicateTitle3']);
+            expect(entityFields.map((ef) => ef.propName)).toMatchObject(['duplicateTitle', 'duplicateTitle2', 'duplicateTitle3', 'fileSystemObjectType']);
         });
     });
 
@@ -130,7 +129,7 @@ describe('EntityFieldsFactory', () => {
                     return await entityFieldsFactory.create('List', {
                         field: 'Field'
                     });
-                }).to.not.throw();
+                }).not.toThrow();
             });
 
             it('should map list item properties', async () => {
@@ -147,10 +146,8 @@ describe('EntityFieldsFactory', () => {
                     fileSystemObjectType: 'FileSystemObjectType'
                 });
 
-                expect(entityFields.map((ef) => ef.internalName))
-                    .to.have.length(1)
-                    .and
-                    .to.deep.equal(['FileSystemObjectType']);
+                expect(entityFields.map((ef) => ef.internalName)).toHaveLength(1);
+                expect(entityFields.map((ef) => ef.internalName)).toMatchObject(['FileSystemObjectType']);
             });
 
             it('should warn if field is not found in list', async () => {
@@ -195,7 +192,7 @@ describe('EntityFieldsFactory', () => {
                     dependent: dependentLookupField.internalName
                 });
 
-                expect(dependentLookupField.isDependentLookup).to.equal(true);
+                expect(dependentLookupField.isDependentLookup).toEqual(true);
 
                 warnMock.verify(
                     (warn) => warn(TypeMoq.It.is((msg) => msg.includes('is not a valid dependent lookup'))),
@@ -285,7 +282,7 @@ describe('EntityFieldsFactory', () => {
                     return await entityFieldsFactory.create('List', {
                         field: { $name: 'Field' }
                     });
-                }).to.not.throw();
+                }).not.toThrow();
             });
         });
 
@@ -345,7 +342,7 @@ describe('EntityFieldsFactory', () => {
                     expand: { $name: 'FieldLookup', bool: invalidLookupField.internalName }
                 });
 
-                expect(invalidLookupField.isProjectableField).to.equal(false);
+                expect(invalidLookupField.isProjectableField).toEqual(false);
 
                 warnMock.verify(
                     (warn) => warn(TypeMoq.It.is((msg) => msg.includes('is not a valid expand field'))),
@@ -375,10 +372,10 @@ describe('EntityFieldsFactory', () => {
                     expand: { $name: 'FieldLookup', expand: 'ExpandField' }
                 });
 
-                expect(entityFields).to.have.length(1);
-                expect(entityFields[0]).to.be.an.instanceof(EntityExpandField);
-                expect((entityFields[0] as EntityExpandField).expandFields).to.have.length(1);
-                expect((entityFields[0] as EntityExpandField).expandFields[0]).to.have.property('internalName', 'ExpandField');
+                expect(entityFields).toHaveLength(1);
+                expect(entityFields[0]).toBeInstanceOf(EntityExpandField);
+                expect((entityFields[0] as EntityExpandField).expandFields).toHaveLength(1);
+                expect((entityFields[0] as EntityExpandField).expandFields[0]).toHaveProperty('internalName', 'ExpandField');
 
                 warnMock.verify(
                     (warn) => warn(TypeMoq.It.isAnyString()),

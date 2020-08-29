@@ -4,6 +4,6 @@ export interface EntityConfig {
 }
 
 export interface Config {
-    odataVerbose: boolean;
+    odataVerbose?: boolean;
     entities: Array<EntityConfig>;
 }

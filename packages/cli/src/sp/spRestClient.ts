@@ -1,7 +1,7 @@
-import { sp } from '@pnp/sp';
-import { IList } from '@pnp/sp/lists';
-import { IContextInfo, ISite, Site } from '@pnp/sp/sites';
-import { IWeb, Web } from '@pnp/sp/webs';
+import { sp } from '@pnp/sp-commonjs';
+import { IList } from '@pnp/sp-commonjs/lists';
+import { IContextInfo, ISite, Site } from '@pnp/sp-commonjs/sites';
+import { IWeb, Web } from '@pnp/sp-commonjs/webs';
 import chalk from 'chalk';
 import { isGuid } from 'is-guid';
 import { IAuthContext } from 'node-sp-auth-config';
@@ -50,7 +50,7 @@ export class SpRestClient {
     public static async create(authContext: IAuthContext): Promise<SpRestClient> {
 
         try {
-            
+
             sp.setup({
                 sp: {
                     fetchClientFactory: () => new NodeFetchClient(authContext.authOptions),

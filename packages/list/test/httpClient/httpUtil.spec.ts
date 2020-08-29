@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { combineUrl, formatUrl } from '../../src/httpClient/httpUtil';
 import { OrderByQueryParam } from '../../src/odata';
 
@@ -19,7 +18,7 @@ describe('httpUtil', () => {
             it(`should combine url (${i + 1})`, () => {
                 const [left, right, expected] = test;
                 const result: string = combineUrl(left as string, right as string);
-                expect(result).to.equal(expected);
+                expect(result).toEqual(expected);
             });
         });
     });
@@ -33,7 +32,7 @@ describe('httpUtil', () => {
                 $select: ['Field', 'Expand/Field'],
                 $expand: ['Expand']
             });
-            expect(result).to.equal(`${siteUrl}?%24expand=Expand&%24select=Field%2CExpand%2FField`);
+            expect(result).toEqual(`${siteUrl}?%24expand=Expand&%24select=Field%2CExpand%2FField`);
         });
 
         describe('$orderby', () => {
@@ -42,21 +41,21 @@ describe('httpUtil', () => {
                 const result: string = formatUrl(siteUrl, {
                     $orderby: { orderBy: 'Field' } as OrderByQueryParam
                 });
-                expect(result).to.equal(`${siteUrl}?%24orderby=Field`);
+                expect(result).toEqual(`${siteUrl}?%24orderby=Field`);
             });
 
             it('should format single value with ascending set to true', () => {
                 const result: string = formatUrl(siteUrl, {
                     $orderby: { orderBy: 'Field', ascending: true } as OrderByQueryParam
                 });
-                expect(result).to.equal(`${siteUrl}?%24orderby=Field%20asc`);
+                expect(result).toEqual(`${siteUrl}?%24orderby=Field%20asc`);
             });
 
             it('should format single value with ascending set to false', () => {
                 const result: string = formatUrl(siteUrl, {
                     $orderby: { orderBy: 'Field', ascending: false } as OrderByQueryParam
                 });
-                expect(result).to.equal(`${siteUrl}?%24orderby=Field%20desc`);
+                expect(result).toEqual(`${siteUrl}?%24orderby=Field%20desc`);
             });
 
             it('should format array', () => {
@@ -66,7 +65,7 @@ describe('httpUtil', () => {
                         { orderBy: 'Field2', ascending: false }
                     ]
                 });
-                expect(result).to.equal(`${siteUrl}?%24orderby=Field1%20asc%2CField2%20desc`);
+                expect(result).toEqual(`${siteUrl}?%24orderby=Field1%20asc%2CField2%20desc`);
             });
         });
     });

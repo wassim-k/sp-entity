@@ -1,4 +1,4 @@
-import { IHttpClientImpl } from '@pnp/common';
+import { IHttpClientImpl } from '../config';
 import { combineUrl } from './httpUtil';
 
 export class RequestDigest {

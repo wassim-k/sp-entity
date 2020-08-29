@@ -10,6 +10,9 @@
             "es2015.promise",
             "dom"
         ],
+        "types": [
+            "node"
+        ],
         "noUnusedLocals": true,
         "module": "commonjs",
         "target": "es5",
@@ -21,9 +24,6 @@
         "sourceMap": true,
     },
     "files": [
-        "./src/index.ts",
-    ],
-    "include": [
-        "test/**/*.spec.ts"
+        "./src/index.ts"
     ]
 }
