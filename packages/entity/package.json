@@ -1,6 +1,6 @@
 {
     "name": "@sp-entity/entity",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Entity class for SharePoint list",
     "repository": {
         "type": "git",
@@ -30,7 +30,7 @@
         "tslint": "tslint --project ./tsconfig.json"
     },
     "dependencies": {
-        "@sp-entity/list": "^1.1.0"
+        "@sp-entity/list": "^1.2.0"
     },
     "devDependencies": {
         "ncp": "^2.0.0"
